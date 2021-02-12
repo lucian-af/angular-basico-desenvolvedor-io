@@ -1,0 +1,92 @@
+<div
+  class="alert {{ alertClass }}"
+  [ngClass]="nome"
+  role="alert"
+  *ngIf="bindingType !== '' || nome !== ''"
+>
+  Olá, eu uso {{ bindingType || binding[bindingEnum.TwoWay] }}!
+</div>
+
+<div class="container main-container">
+  <h3>{{ binding[bindingEnum.Interpolation] }}</h3>
+
+  <!-- <p>O número de cliques é: {{ contadorClique }}</p> -->
+
+  <p
+    [ngClass]="{
+      'text-secondary': contadorClique < 3,
+      'text-success': contadorClique >= 3,
+      'text-warning': contadorClique >= 5,
+      'text-danger': contadorClique >= 9
+    }"
+    class="font-weight-bold"
+  >
+    O número de cliques é: {{ contadorClique }}
+  </p>
+
+  <br />
+
+  <h3>{{ binding[bindingEnum.Property] }}</h3>
+  <button
+    class="btn btn-primary"
+    [disabled]="contadorClique >= 10"
+    (click)="info()"
+  >
+    <img [src]="urlImagem" height="25px" width="25px" alt="" />
+    Info
+  </button>
+
+  <br />
+  <br />
+
+  <h3>{{ binding[bindingEnum.Event] }}</h3>
+  <button class="btn btn-warning mr-3" (click)="adicionarClique()">
+    Clique-me
+  </button>
+  <button
+    class="btn btn-danger"
+    [disabled]="contadorClique < 10"
+    (click)="zerarContador()"
+  >
+    Zerar Contador
+  </button>
+
+  <br />
+  <br />
+
+  <h3>{{ binding[bindingEnum.TwoWay] }}</h3>
+  <!-- 
+    Solução alternativa 1 de two-way binding
+    <input
+    class="form-control w-50"
+    type="text"
+    (keyup)="keyUp($event)"
+    placeholder="Digite seu nome!"
+  />
+  <br />
+  <br />
+  <label>Seu nome é: {{ nome }}</label> -->
+
+  <!-- Solução alternativa 2 de two-way binding -->
+  <!-- <input
+    class="form-control w-50"
+    type="text"
+    [ngModel]="(nome)"
+    (ngModelChange)="nome = $event"
+    placeholder="Digite seu nome!"
+  />
+  <br />
+  <br />
+  <label>Seu nome é: {{ nome }}</label> -->
+
+  <input
+    class="form-control w-50"
+    type="text"
+    [(ngModel)]="nome"
+    (keyup)="keyUp('')"
+    placeholder="Digite seu nome!"
+  />
+  <br />
+  <br />
+  <label [ngClass]="nome">Seu nome é: {{ nome }}</label>
+</div>
