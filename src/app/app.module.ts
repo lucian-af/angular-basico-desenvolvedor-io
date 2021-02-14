@@ -11,6 +11,15 @@ import { RouterModule } from '@angular/router';
 import { rootRouterConfig } from './app.routes';
 import { DataBindingComponent } from './demos/data-binding/data-binding.component';
 import { FormsModule } from '@angular/forms';
+import { ProdutoService } from './produtos/produtos.service';
+import { ListaProdutoComponent } from './produtos/lista-produto/lista-produto.component';
+import { HttpClientModule } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { FormatCurrency } from './shared/pipes/format-currency-pt.pipe';
+import { FormatDocument } from './shared/pipes/format.documento.pipe';
+import { MaskDocument } from './shared/pipes/mask.document.pipe';
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -20,14 +29,21 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     SobreComponent,
     ContatoComponent,
-    DataBindingComponent,    
+    DataBindingComponent,
+    ListaProdutoComponent,
+    FormatCurrency,
+    FormatDocument,
+    MaskDocument
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false })
   ],
-  providers: [],
+  providers: [
+    ProdutoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
