@@ -1,3 +1,9 @@
 .padding-top {
   padding-top: 56px;
 }
+
+input,
+select,
+textarea {
+  max-width: 400px;
+}
